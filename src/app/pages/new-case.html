@@ -1,0 +1,165 @@
+<div class="page">
+  <p class="eyebrow">REGISTRO / NOVA INVESTIGAÇÃO</p>
+  <h1 class="page-title">Abra um novo <span class="text-amber">caso.</span></h1>
+  @if (savedCase(); as saved) {
+    <section class="panel mt-8 max-w-3xl p-8 md:p-12" role="status">
+      <span class="text-3xl text-success" aria-hidden="true">✓</span>
+      <p class="eyebrow mt-6 text-success">{{ saved.id }}</p>
+      <h2 class="section-title mt-3">Ocorrência registrada.</h2>
+      <p class="mt-4 break-words text-lg">{{ saved.title }}</p>
+      <p class="mt-3 text-sm leading-relaxed text-muted">
+        O caso já aparece na central com {{ saved.suspectIds.length }} registros vinculados. Novos
+        casos começam sem evidências cadastradas.
+      </p>
+      <p
+        class="mt-4 text-sm"
+        [class.text-amber]="store.storageUnavailable()"
+        [class.text-muted]="!store.storageUnavailable()"
+      >
+        {{
+          store.storageUnavailable()
+            ? 'O armazenamento está indisponível: este caso fica apenas
+      nesta sessão.'
+            : 'Salvo neste navegador. Os dados permanecem após recarregar a página.'
+        }}
+      </p>
+      <a class="btn btn-primary mt-8" routerLink="/">Ver caso na central ↗</a>
+    </section>
+  } @else {
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted">
+      Descreva a ocorrência e vincule os registros envolvidos. As pessoas do mesmo caso passam a
+      aparecer conectadas.
+    </p>
+    <div class="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_300px]">
+      <form class="panel grid gap-6 p-5 md:p-8" [formGroup]="form" (ngSubmit)="submit()">
+        <label class="grid gap-2 text-sm"
+          ><span id="title-label">Título do caso</span
+          ><input
+            class="field"
+            formControlName="title"
+            aria-labelledby="title-label"
+            maxlength="100"
+            placeholder="Ex.: Operação Horizonte"
+            aria-required="true"
+            [attr.aria-invalid]="hasError('title')"
+            aria-describedby="title-error"
+          />
+          @if (hasError('title')) {
+            <span id="title-error" class="text-xs text-danger"
+              >Use de 4 a 100 caracteres, sem contar espaços nas pontas.</span
+            >
+          }
+        </label>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="grid gap-2 text-sm"
+            ><span id="location-label">Localização</span
+            ><input
+              class="field"
+              formControlName="location"
+              aria-labelledby="location-label"
+              maxlength="80"
+              placeholder="Ex.: Distrito Central"
+              aria-required="true"
+              [attr.aria-invalid]="hasError('location')"
+              aria-describedby="location-error"
+            />
+            @if (hasError('location')) {
+              <span id="location-error" class="text-xs text-danger"
+                >Informe uma localização com pelo menos 2 caracteres.</span
+              >
+            }</label
+          ><label class="grid gap-2 self-start text-sm"
+            ><span id="priority-label">Prioridade</span
+            ><select class="field" formControlName="priority" aria-labelledby="priority-label">
+              <option>Baixa</option>
+              <option>Média</option>
+              <option>Alta</option>
+            </select></label
+          >
+        </div>
+        <label class="grid gap-2 text-sm"
+          ><span id="description-label">Descrição da ocorrência</span
+          ><textarea
+            class="field min-h-36 resize-y"
+            rows="5"
+            formControlName="description"
+            aria-labelledby="description-label"
+            maxlength="2000"
+            placeholder="Quais pistas devem ser investigadas?"
+            aria-required="true"
+            [attr.aria-invalid]="hasError('description')"
+            aria-describedby="description-help description-error"
+          ></textarea
+          ><span id="description-help" class="text-xs text-muted"
+            >Mínimo de 15 caracteres · {{ descriptionLength() }}/2000</span
+          >
+          @if (hasError('description')) {
+            <span id="description-error" class="text-xs text-danger"
+              >Descreva a ocorrência com pelo menos 15 caracteres.</span
+            >
+          }
+        </label>
+        <fieldset class="border-t border-line pt-5">
+          <legend class="pr-3 text-sm">
+            Vincular suspeitos <span class="text-muted">(opcional)</span>
+          </legend>
+          <p class="mb-4 text-xs leading-relaxed text-muted">
+            Selecione dois ou mais registros para criar conexões entre eles.
+          </p>
+          @if (directory.loading()) {
+            <p class="text-sm text-muted" role="status">Carregando registros...</p>
+          } @else if (directory.state() === 'error') {
+            <div class="text-sm text-muted">
+              <p>Não foi possível carregar os suspeitos. Você ainda pode registrar o caso.</p>
+              <button type="button" class="text-link" (click)="directory.load()">
+                Tentar novamente
+              </button>
+            </div>
+          } @else {
+            <div class="grid gap-2 sm:grid-cols-2">
+              @for (person of directory.people(); track person.id) {
+                <label
+                  class="flex min-h-11 cursor-pointer items-center gap-3 rounded-md border border-line px-3 py-2 text-sm hover:border-cyan/50"
+                  ><input
+                    type="checkbox"
+                    class="h-4 w-4 shrink-0 accent-cyan"
+                    [checked]="selectedIds().includes(person.id)"
+                    (change)="toggleSuspect(person.id)"
+                  /><span>{{ person.name }}</span></label
+                >
+              } @empty {
+                <p class="text-sm text-muted">Não há registros disponíveis.</p>
+              }
+            </div>
+          }
+        </fieldset>
+        <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
+          <a routerLink="/" class="text-link">Cancelar</a
+          ><button type="submit" class="btn btn-primary" [disabled]="!canSubmit()">
+            Registrar ocorrência ↗
+          </button>
+        </div>
+      </form>
+      <aside class="panel border-t-2 border-t-amber p-6">
+        <p class="eyebrow text-amber">ANTES DE REGISTRAR</p>
+        <h2 class="section-title mt-4">Uma boa pista começa com contexto.</h2>
+        <ol class="mt-6 space-y-5 text-sm leading-relaxed text-muted">
+          <li>
+            <span class="mr-2 font-mono text-cyan">01</span>Dê um nome que ajude a reconhecer o
+            caso.
+          </li>
+          <li>
+            <span class="mr-2 font-mono text-cyan">02</span>Conte o que aconteceu e onde investigar.
+          </li>
+          <li>
+            <span class="mr-2 font-mono text-cyan">03</span>Associe os registros que fazem parte da
+            ocorrência.
+          </li>
+        </ol>
+        <p class="mt-8 border-t border-line pt-5 text-xs leading-relaxed text-muted">
+          Os casos deste ambiente de demonstração ficam salvos apenas neste navegador.
+        </p>
+      </aside>
+    </div>
+  }
+</div>

@@ -1,0 +1,57 @@
+<a
+  href="#conteudo"
+  class="sr-only z-50 bg-cyan px-5 py-3 text-ink focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
+  >Pular para o conteúdo</a
+>
+<header class="sticky top-0 z-30 border-b border-line bg-ink/95 backdrop-blur-md">
+  <div class="mx-auto flex max-w-[1228px] flex-wrap items-center gap-x-8 gap-y-3 px-6 py-4 md:py-5">
+    <a
+      routerLink="/"
+      class="flex items-center gap-3 font-bold tracking-[.12em]"
+      aria-label="INTERLINK, início"
+    >
+      <svg width="25" height="26" viewBox="0 0 25 26" aria-hidden="true">
+        <path d="M3 3h12v12H3zM10 11h12v12H10z" fill="none" stroke="#F26A3D" stroke-width="2" />
+        <path d="M10 11h5v4h-5z" fill="#42D9FF" />
+      </svg>
+      INTERLINK
+    </a>
+    <nav
+      aria-label="Navegação principal"
+      class="order-3 flex w-full gap-1 text-sm md:order-none md:w-auto md:flex-1 md:gap-3"
+    >
+      <a
+        routerLink="/"
+        routerLinkActive="!text-paper !border-amber !bg-panel"
+        ariaCurrentWhenActive="page"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="min-h-11 border-b-2 border-transparent px-3 py-3 text-muted hover:text-paper"
+        >Central</a
+      >
+      <a
+        routerLink="/suspeitos"
+        routerLinkActive="!text-paper !border-amber !bg-panel"
+        ariaCurrentWhenActive="page"
+        class="min-h-11 border-b-2 border-transparent px-3 py-3 text-muted hover:text-paper"
+        >Suspeitos</a
+      >
+      <a
+        routerLink="/novo-caso"
+        routerLinkActive="!text-paper !border-amber !bg-panel"
+        ariaCurrentWhenActive="page"
+        class="min-h-11 border-b-2 border-transparent px-3 py-3 text-muted hover:text-paper"
+        >Novo caso</a
+      >
+    </nav>
+    <span class="ml-auto flex items-center gap-2 font-mono text-[10px] tracking-wider text-muted"
+      ><span class="h-1.5 w-1.5 bg-success" aria-hidden="true"></span>AMBIENTE DEMO</span
+    >
+  </div>
+</header>
+<main id="conteudo" tabindex="-1" class="min-h-[calc(100vh-190px)]"><router-outlet /></main>
+<footer
+  class="mx-auto flex max-w-[1180px] flex-wrap justify-between gap-3 border-t border-line px-6 py-6 font-mono text-[10px] leading-relaxed text-muted md:px-0"
+>
+  <span>INTERLINK / CENTRAL DE INVESTIGAÇÃO</span
+  ><span>Pessoas, riscos e casos fictícios · Projeto acadêmico</span>
+</footer>

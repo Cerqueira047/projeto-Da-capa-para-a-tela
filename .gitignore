@@ -1,0 +1,14 @@
+node_modules/
+.angular/
+dist/
+tmp/
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.log
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/

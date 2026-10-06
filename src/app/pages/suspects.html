@@ -1,0 +1,76 @@
+<div class="page">
+  <p class="eyebrow">DIRETÓRIO / IDENTIDADES</p>
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h1 class="page-title">Siga as <span class="text-amber">pistas.</span></h1>
+      <p class="mt-4 max-w-xl text-base leading-relaxed text-muted">
+        Cada registro conta uma parte da história. Encontre um suspeito e explore seu dossiê.
+      </p>
+    </div>
+    <span class="font-mono text-xs text-muted">{{ store.watchedIds().length }} ACOMPANHADOS</span>
+  </div>
+  <section class="panel mt-8 p-5" aria-label="Filtros de suspeitos">
+    <div class="grid items-end gap-4 md:grid-cols-[1fr_190px_auto]">
+      <label class="grid gap-2 text-xs text-muted"
+        >Pesquisar registros<input
+          class="field text-base"
+          type="search"
+          [value]="search()"
+          (input)="search.set($any($event.target).value)"
+          placeholder="Nome, usuário, empresa ou cidade"
+      /></label>
+      <label class="grid gap-2 text-xs text-muted"
+        >Classificação de risco<select
+          class="field"
+          [value]="risk()"
+          (change)="setRisk($any($event.target).value)"
+        >
+          <option value="">Todos os riscos</option>
+          <option value="BAIXO">Baixo</option>
+          <option value="MÉDIO">Médio</option>
+          <option value="ALTO">Alto</option>
+        </select></label
+      >
+      <button
+        class="btn btn-secondary"
+        [attr.aria-pressed]="onlyWatched()"
+        [class.border-cyan]="onlyWatched()"
+        (click)="onlyWatched.set(!onlyWatched())"
+      >
+        {{ onlyWatched() ? '✓ ' : '' }}Acompanhados
+      </button>
+    </div>
+  </section>
+  @if (directory.loading()) {
+    <div class="state mt-6" role="status">
+      <p class="eyebrow">CONSULTANDO ARQUIVO...</p>
+      <p class="text-muted">Carregando as identidades da central.</p>
+    </div>
+  } @else if (directory.state() === 'error') {
+    <div class="state mt-6" role="alert">
+      <h2 class="text-xl font-bold">Não foi possível acessar os registros.</h2>
+      <p class="text-muted">Confira sua conexão e tente novamente.</p>
+      <button class="btn btn-primary" (click)="directory.load()">Tentar novamente</button>
+    </div>
+  } @else {
+    <p class="my-6 font-mono text-xs text-muted" role="status">
+      {{ count() }} resultados · {{ high() }} com risco alto nesta seleção
+    </p>
+    <section class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-label="Registros de suspeitos">
+      @for (person of filtered(); track person.id) {
+        <app-suspect-card
+          [s]="person"
+          [connections]="store.connectionsFor(person.id).length"
+          [watched]="store.watchedIds().includes(person.id)"
+          (watchToggled)="store.toggleWatch($event)"
+        />
+      } @empty {
+        <div class="state sm:col-span-2 lg:col-span-3">
+          <h2 class="text-xl font-bold">Nenhum registro encontrado.</h2>
+          <p class="text-muted">Tente outro termo ou remova os filtros.</p>
+          <button class="btn btn-secondary" (click)="clearFilters()">Limpar filtros</button>
+        </div>
+      }
+    </section>
+  }
+</div>

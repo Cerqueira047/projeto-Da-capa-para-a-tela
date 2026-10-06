@@ -12,32 +12,7 @@ O ponto de partida é o [pôster oficial de Blade Runner 2049](https://www.warne
 - [Moodboard em PDF](docs/moodboard-interlink-blade-runner-2049.pdf): a página 2 reúne as 16 referências em um painel; as seguintes detalham os quatro grupos e a síntese.
 - [Identidade visual em PDF](docs/identidade-visual-interlink.pdf): uma página com nome, paleta, tipografia, formas, frase de direção e duas telas; a segunda amplia os desenhos.
 - [Fontes das referências](docs/fontes-moodboard.md).
-- [Conferência dos requisitos](docs/checklist-entrega.md).
-- [Roteiro de apresentação de 5 minutos](docs/roteiro-apresentacao.md).
-- [Apresentação em PDF](docs/apresentacao-interlink.pdf) e [PowerPoint editável com notas de fala](docs/apresentacao-interlink.pptx).
-- [Guia de código: signals, computed e eventos](docs/guia-codigo-interlink.md), com exemplos e exercícios com gabarito.
-- [Capturas do site em computador e celular](docs/telas/).
 
-## Como rodar
-
-Use **Node.js 24.15 ou superior da linha 24 LTS**, com npm. A faixa completa suportada está em `package.json`. O projeto usa Angular 22, TypeScript 6 e Tailwind CSS 4.
-
-```sh
-git clone https://github.com/Cerqueira047/projeto-Da-capa-para-a-tela.git
-cd projeto-Da-capa-para-a-tela
-npm ci
-npm start
-```
-
-Abra [localhost:4200](http://localhost:4200). É preciso acesso à internet para consultar os registros da API pública; as fontes são arquivos locais, incluídos no projeto.
-
-Para gerar a versão de produção:
-
-```sh
-npm run build
-```
-
-Os arquivos saem em `dist/interlink/browser`. Uma hospedagem precisa encaminhar rotas como `/suspeitos/3` para `index.html`, porque a navegação é de uma SPA. A atividade pode ser demonstrada com o servidor local; este repositório não configura hospedagem automática.
 
 ## O que funciona
 

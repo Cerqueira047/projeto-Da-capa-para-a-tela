@@ -14,6 +14,8 @@ O ponto de partida é o [pôster oficial de Blade Runner 2049](https://www.warne
 - [Fontes das referências](docs/fontes-moodboard.md).
 - [Conferência dos requisitos](docs/checklist-entrega.md).
 - [Roteiro de apresentação de 5 minutos](docs/roteiro-apresentacao.md).
+- [Apresentação em PDF](docs/apresentacao-interlink.pdf) e [PowerPoint editável com notas de fala](docs/apresentacao-interlink.pptx).
+- [Guia de código: signals, computed e eventos](docs/guia-codigo-interlink.md), com exemplos e exercícios com gabarito.
 - [Capturas do site em computador e celular](docs/telas/).
 
 ## Como rodar
@@ -98,3 +100,11 @@ python docs/gerar-identidade-visual.py
 Mantenha `docs/moodboard-assets` e `public/fonts`. Os scripts funcionam sem rede. O moodboard usa Segoe UI/Consolas no Windows, com alternativa DejaVu Sans/Mono no Linux. Os documentos são entregáveis separados e não viram rotas do Angular.
 
 As imagens de pesquisa têm créditos em [fontes-moodboard.md](docs/fontes-moodboard.md). Space Grotesk e DM Mono têm suas licenças OFL em `public/fonts`. O desenvolvimento e a documentação tiveram apoio de IA, detalhado no [CONCEITO.md](CONCEITO.md).
+
+## Preparar a apresentação
+
+A apresentação tem seis telas e notas de fala no PowerPoint. Use o PDF para exibir a composição pronta. Na tela 4, alterne para o navegador e demonstre a busca e os dossiês; nas telas 5 e 6, abra o código para explicar estado, cálculos e acompanhamento. O [roteiro](docs/roteiro-apresentacao.md) indica os tempos e o [guia de código](docs/guia-codigo-interlink.md) aprofunda os exemplos.
+
+O PDF da apresentação preserva as telas como imagens. No PowerPoint, os títulos, explicações e trechos de código são editáveis; o moodboard, a identidade e a captura do app são imagens de referência. Para conservar a aparência ao editar em outro computador, use as fontes em `public/fonts`.
+
+O script `docs/gerar-apresentacao.mjs` usa o runtime de documentos do Codex (`@oai/artifact-tool`), Poppler e Python com ReportLab. Ele recebe os caminhos de `node_modules` do runtime, da skill de apresentações e do Python. Esses recursos servem apenas à geração do material e não são dependências do site.

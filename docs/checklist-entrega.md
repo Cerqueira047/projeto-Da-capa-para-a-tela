@@ -47,6 +47,8 @@ Conferência baseada no enunciado **Da capa para a tela**, em 6 de outubro de 20
 - PDFs e seus scripts em `docs`, com referências locais para geração novamente.
 - Aplicação pode ser iniciada com `npm ci` e `npm start`.
 - [Roteiro de 5 minutos](roteiro-apresentacao.md) com uma sequência prática e perguntas para ensaiar.
+- [Apresentação em PDF](apresentacao-interlink.pdf) e [PowerPoint](apresentacao-interlink.pptx) com seis telas e notas de fala.
+- [Guia do código](guia-codigo-interlink.md) com exemplos de signals, computed, input/output, formulário e armazenamento, além de exercícios com gabarito.
 
 ## Limites da demonstração
 

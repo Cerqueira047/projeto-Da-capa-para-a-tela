@@ -2,6 +2,21 @@
 
 Este é um guia para ensaiar. Use suas palavras e só apresente uma explicação que você compreende. Deixe os PDFs abertos, o site rodando e o arquivo de código separado antes de começar.
 
+Há uma [apresentação em PDF](apresentacao-interlink.pdf) e uma [versão editável em PowerPoint](apresentacao-interlink.pptx), com notas de fala em cada slide. Para estudar o trecho técnico, use o [guia do código](guia-codigo-interlink.md).
+
+### Se usar os slides prontos
+
+| Tela | Tempo | O que mostrar |
+| --- | --- | --- |
+| 1. INTERLINK e identidade | 0:00–0:35 | Capa e ligação funcional |
+| 2. Moodboard | 0:35–1:10 | Painel e dois ou três achados |
+| 3. Identidade visual | 1:10–1:40 | Cores, fontes e formas |
+| 4. Investigação por conexões | 1:40–3:00 | Alternar para o site e navegar entre registros |
+| 5. Estado e valores calculados | 3:00–4:00 | Abrir `suspects.ts` e explicar `search` e `count` |
+| 6. O clique muda o acompanhamento | 4:00–5:00 | Evento do card e `toggleWatch` no serviço |
+
+A sequência abaixo também funciona apresentando diretamente os documentos, com um pouco mais de tempo para o visual e menos para o código.
+
 ## 0:00–0:40 — Capa e conceito
 
 Mostre a capa no moodboard ou na página oficial da Warner. Ela não aparece no site.

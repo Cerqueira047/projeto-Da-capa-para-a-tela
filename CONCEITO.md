@@ -67,6 +67,5 @@ Pedi a criação de um moodboard em PDF, usando a página oficial da Warner como
 
 Também houve implementação e revisão de código com IA: aplicação da identidade visual, busca e filtros, vínculos entre casos e pessoas, acompanhamento, armazenamento local, validação do formulário e testes. O roteiro de apresentação e esta documentação tiveram o mesmo apoio. Os estudos vetoriais feitos para o moodboard estão identificados como produzidos com apoio de IA.
 
-### Decisões que preciso saber defender
 
-Os detalhes propostos durante essa revisão, como Space Grotesk, DM Mono, raios de 6 px e a organização dos dossiês, devem ser revisados por mim antes da apresentação. Não seria correto tratar toda a implementação como escrita individualmente sem apoio. Preciso conseguir explicar as escolhas e o código com minhas próprias palavras, principalmente a diferença entre estado em `signal` e informações derivadas em `computed`.
+
